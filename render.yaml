@@ -1,0 +1,37 @@
+services:
+    # Backend Service
+    - type: web
+      name: echomind-backend
+      runtime: node
+      env: node
+      buildCommand: cd server && npm install
+      startCommand: cd server && npm start
+      envVars:
+          - key: NODE_ENV
+            value: production
+          - key: MONGODB_URI
+            sync: false
+          - key: JWT_SECRET
+            sync: false
+          - key: CLOUDINARY_CLOUD_NAME
+            sync: false
+          - key: CLOUDINARY_API_KEY
+            sync: false
+          - key: CLOUDINARY_API_SECRET
+            sync: false
+          - key: CLIENT_URL
+            value: https://echomind-frontend-7815.onrender.com
+
+    # Frontend Service
+    - type: web
+      name: echomind-frontend
+      runtime: static
+      buildCommand: cd client && npm install && npm run build
+      staticPublishPath: ./client/dist
+      routes:
+          - type: rewrite
+            source: /*
+            destination: /index.html
+      envVars:
+          - key: VITE_API_URL
+            value: https://echomind-backend-0ann.onrender.com
