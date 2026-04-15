@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://echomind-frontend-3jmp.onrender.com/"
+    "https://echomind-frontend-3jmp.onrender.com"
 ];
 
 app.use(
